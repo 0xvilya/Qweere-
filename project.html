@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проект — IndieHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">I</div>
+        IndieHub
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html">Добавить</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="nav-actions">
+        <a href="projects.html" class="btn btn-ghost">Войти</a>
+        <a href="add-project.html" class="btn btn-primary">+ Проект</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 40px;">
+    <div class="project-detail" id="projectDetail">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">I</div>
+          IndieHub
+        </a>
+        <p>Платформа для независимых разработчиков. Показывай то, что строишь.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html">Добавить проект</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="footer-col">
+        <h4>Сообщество</h4>
+        <a href="#">Discord</a>
+        <a href="#">Telegram</a>
+        <a href="#">GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ресурсы</h4>
+        <a href="about.html">Манифест</a>
+        <a href="#">Блог</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IndieHub. Сделано с любовью к коду.</span>
+      <span>Open Source · Independent</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const all = getAllProjects();
+      const project = all.find(p => String(p.id) === String(id));
+
+      const container = document.getElementById('projectDetail');
+
+      if (!project) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="icon">😕</div>
+            <p>Проект не найден</p>
+            <a href="projects.html" class="btn btn-primary" style="margin-top: 16px;">Ко всем проектам</a>
+          </div>`;
+        return;
+      }
+
+      document.title = `${project.title} — IndieHub`;
+
+      container.innerHTML = `
+        <div class="detail-cover">${project.emoji || '🚀'}</div>
+        <div class="detail-header">
+          <div class="project-tags" style="margin-bottom: 12px;">
+            ${project.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+          </div>
+          <h1>${project.title}</h1>
+          <div class="detail-meta">
+            <div class="project-author">
+              <div class="avatar">${(project.author || 'A')[0].toUpperCase()}</div>
+              <span>${project.author || 'anonymous'}</span>
+            </div>
+            <span>★ ${project.stars || 0}</span>
+            <span>${project.category}</span>
+          </div>
+        </div>
+        <div class="detail-content">
+          <p>${project.description}</p>
+          ${project.longDescription ? `<p>${project.longDescription}</p>` : ''}
+        </div>
+        <div class="detail-links">
+          ${project.demo ? `<a href="${project.demo}" target="_blank" class="btn btn-primary">Открыть демо →</a>` : ''}
+          ${project.github ? `<a href="${project.github}" target="_blank" class="btn btn-secondary">GitHub</a>` : ''}
+          <a href="projects.html" class="btn btn-ghost">← Назад к проектам</a>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

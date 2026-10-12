@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Добавить проект — IndieHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">I</div>
+        IndieHub
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html" class="active">Добавить</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="nav-actions">
+        <a href="projects.html" class="btn btn-ghost">Войти</a>
+        <a href="add-project.html" class="btn btn-primary">+ Проект</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Добавить проект</h1>
+    <p>Расскажи сообществу, что ты строишь</p>
+  </div>
+
+  <section class="section">
+    <div class="form-card">
+      <form id="projectForm">
+        <div class="form-group">
+          <label for="title">Название проекта *</label>
+          <input type="text" id="title" name="title" placeholder="Например: PixelFlow" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Краткое описание *</label>
+          <textarea id="description" name="description" placeholder="Что делает твой проект? Для кого он?" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="category">Категория</label>
+            <select id="category" name="category">
+              <option value="web">Web</option>
+              <option value="mobile">Mobile</option>
+              <option value="ai">AI</option>
+              <option value="games">Games</option>
+              <option value="tools">Tools</option>
+              <option value="open-source">Open Source</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="tags">Теги (через запятую)</label>
+            <input type="text" id="tags" name="tags" placeholder="React, TypeScript, Tailwind">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="demo">Ссылка на демо</label>
+          <input type="url" id="demo" name="demo" placeholder="https://...">
+        </div>
+
+        <div class="form-group">
+          <label for="github">Ссылка на GitHub</label>
+          <input type="url" id="github" name="github" placeholder="https://github.com/...">
+        </div>
+
+        <div class="form-group">
+          <label for="author">Твой ник / имя</label>
+          <input type="text" id="author" name="author" placeholder="anonymous">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+          Опубликовать проект
+        </button>
+      </form>
+
+      <div id="successMsg" style="display: none; text-align: center; padding: 32px 0;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
+        <h3 style="margin-bottom: 8px;">Проект добавлен!</h3>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Он появится в ленте (сохраняется локально в браузере)</p>
+        <a href="projects.html" class="btn btn-primary">Смотреть проекты</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">I</div>
+          IndieHub
+        </a>
+        <p>Платформа для независимых разработчиков. Показывай то, что строишь.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html">Добавить проект</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="footer-col">
+        <h4>Сообщество</h4>
+        <a href="#">Discord</a>
+        <a href="#">Telegram</a>
+        <a href="#">GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ресурсы</h4>
+        <a href="about.html">Манифест</a>
+        <a href="#">Блог</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IndieHub. Сделано с любовью к коду.</span>
+      <span>Open Source · Independent</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('projectForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const newProject = {
+        id: Date.now(),
+        title: document.getElementById('title').value,
+        description: document.getElementById('description').value,
+        category: document.getElementById('category').value,
+        tags: document.getElementById('tags').value.split(',').map(t => t.trim()).filter(Boolean),
+        demo: document.getElementById('demo').value,
+        github: document.getElementById('github').value,
+        author: document.getElementById('author').value || 'anonymous',
+        stars: 0,
+        emoji: '🚀'
+      };
+
+      // Save to localStorage
+      let saved = JSON.parse(localStorage.getItem('indiehub_projects') || '[]');
+      saved.unshift(newProject);
+      localStorage.setItem('indiehub_projects', JSON.stringify(saved));
+
+      document.getElementById('projectForm').style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    });
+  </script>
+</body>
+</html>

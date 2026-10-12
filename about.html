@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О платформе — IndieHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">I</div>
+        IndieHub
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html">Добавить</a>
+        <a href="about.html" class="active">О платформе</a>
+      </div>
+      <div class="nav-actions">
+        <a href="projects.html" class="btn btn-ghost">Войти</a>
+        <a href="add-project.html" class="btn btn-primary">+ Проект</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>О платформе</h1>
+    <p>Зачем мы это делаем и во что верим</p>
+  </div>
+
+  <section class="section">
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>Манифест</h3>
+        <p>
+          Мы верим, что лучшие продукты рождаются не в корпорациях, 
+          а у независимых создателей — тех, кто строит ночами, 
+          потому что не может не строить.
+        </p>
+        <p>
+          IndieHub — это место, где такие проекты видны. 
+          Без алгоритмов, которые прячут. Без давления «вырасти любой ценой».
+        </p>
+        <ul>
+          <li>Показывай процесс, а не только результат</li>
+          <li>Получай честную обратную связь</li>
+          <li>Находи людей, которые думают так же</li>
+          <li>Вдохновляй других своим примером</li>
+        </ul>
+      </div>
+
+      <div class="about-card">
+        <h3>Как это работает</h3>
+        <ul>
+          <li>Добавляешь свой проект — сайт, приложение, инструмент, игру</li>
+          <li>Указываешь технологии и ссылку на GitHub / демо</li>
+          <li>Другие разработчики видят, комментируют, ставят звёзды</li>
+          <li>Ты видишь, что строят другие, и находишь вдохновение</li>
+        </ul>
+        <p style="margin-top: 20px;">
+          Платформа полностью открытая. Код можно будет найти на GitHub.
+        </p>
+        <a href="add-project.html" class="btn btn-primary" style="margin-top: 20px;">Добавить проект</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="about-card" style="text-align: center; max-width: 700px; margin: 0 auto;">
+      <h3>Принципы</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin-top: 28px; text-align: left;">
+        <div>
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">01</div>
+          <strong style="display: block; margin-bottom: 6px;">Независимость</strong>
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Строим без инвесторов и давления метрик</span>
+        </div>
+        <div>
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">02</div>
+          <strong style="display: block; margin-bottom: 6px;">Открытость</strong>
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Процесс важнее идеального релиза</span>
+        </div>
+        <div>
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">03</div>
+          <strong style="display: block; margin-bottom: 6px;">Сообщество</strong>
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Поддержка важнее конкуренции</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">I</div>
+          IndieHub
+        </a>
+        <p>Платформа для независимых разработчиков. Показывай то, что строишь.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html">Добавить проект</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="footer-col">
+        <h4>Сообщество</h4>
+        <a href="#">Discord</a>
+        <a href="#">Telegram</a>
+        <a href="#">GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ресурсы</h4>
+        <a href="about.html">Манифест</a>
+        <a href="#">Блог</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IndieHub. Сделано с любовью к коду.</span>
+      <span>Open Source · Independent</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

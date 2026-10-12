@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проекты — IndieHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">I</div>
+        IndieHub
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Главная</a>
+        <a href="projects.html" class="active">Проекты</a>
+        <a href="add-project.html">Добавить</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="nav-actions">
+        <a href="projects.html" class="btn btn-ghost">Войти</a>
+        <a href="add-project.html" class="btn btn-primary">+ Проект</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <h1>Все проекты</h1>
+    <p>Исследуй, что строят независимые разработчики по всему миру</p>
+  </div>
+
+  <section class="section">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">Все</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="mobile">Mobile</button>
+      <button class="filter-btn" data-filter="ai">AI</button>
+      <button class="filter-btn" data-filter="games">Games</button>
+      <button class="filter-btn" data-filter="tools">Tools</button>
+      <button class="filter-btn" data-filter="open-source">Open Source</button>
+    </div>
+
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <div class="logo-icon">I</div>
+          IndieHub
+        </a>
+        <p>Платформа для независимых разработчиков. Показывай то, что строишь.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Навигация</h4>
+        <a href="index.html">Главная</a>
+        <a href="projects.html">Проекты</a>
+        <a href="add-project.html">Добавить проект</a>
+        <a href="about.html">О платформе</a>
+      </div>
+      <div class="footer-col">
+        <h4>Сообщество</h4>
+        <a href="#">Discord</a>
+        <a href="#">Telegram</a>
+        <a href="#">GitHub</a>
+      </div>
+      <div class="footer-col">
+        <h4>Ресурсы</h4>
+        <a href="about.html">Манифест</a>
+        <a href="#">Блог</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 IndieHub. Сделано с любовью к коду.</span>
+      <span>Open Source · Independent</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('projectsGrid');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+
+      function render(filter = 'all') {
+        let list = projects;
+        if (filter !== 'all') {
+          list = projects.filter(p => p.tags.map(t => t.toLowerCase()).includes(filter) || 
+                                      p.category.toLowerCase() === filter);
+        }
+        grid.innerHTML = list.length 
+          ? list.map(p => projectCardHTML(p)).join('')
+          : '<div class="empty-state"><div class="icon">🔍</div><p>Проектов с таким фильтром пока нет</p></div>';
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          render(btn.dataset.filter);
+        });
+      });
+
+      render();
+    });
+  </script>
+</body>
+</html>
